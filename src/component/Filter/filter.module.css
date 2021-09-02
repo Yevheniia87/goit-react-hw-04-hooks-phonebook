@@ -1,0 +1,11 @@
+.filter {
+  color: cadetblue;
+}
+.filterInput {
+  border-radius: 3px;
+  border: none;
+  outline: none;
+  height: 20px;
+  margin-left: 5px;
+  color: rgb(42, 175, 80);
+}

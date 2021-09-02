@@ -1,0 +1,22 @@
+.buttonDel {
+  color: rgb(42, 175, 80);
+  background-color: rgb(222, 231, 216);
+  border: 1px solid rgb(42, 175, 80);
+  border-radius: 5px;
+  height: 22px;
+  margin-left: 10px;
+  cursor: pointer;
+  text-transform: uppercase;
+}
+.list {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+}
+.li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: rgb(0, 99, 66);
+  margin-bottom: 8px;
+}
