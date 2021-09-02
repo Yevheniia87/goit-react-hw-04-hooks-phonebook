@@ -6,6 +6,7 @@ import { useState } from "react";
 export default function Forma({ onSubmit }) {
   const [name, setName] = useState("");
   const [number, setNumber] = useState("");
+
   const nameInputId = shortid.generate();
   const numberInputId = shortid.generate();
 

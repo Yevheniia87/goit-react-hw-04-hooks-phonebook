@@ -1,14 +1,32 @@
 import "./App.css";
 import shortid from "shortid";
-
 import Forma from "./component/Forma/Forma.js";
 import ContactsList from "./component/ContactList/ContactsList.js";
 import Filter from "./component/Filter/Filter.js";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import defaultContacts from "./component/data/defaultContacts.json";
+//import { Component } from "react";
+// const useLocalStorage = (contacts, defaultContacts) => {
+//   const [state, setState] = useState(() => {
+//     return JSON.parse(window.localStorage.getItem(contacts)) ?? defaultContacts;
+//   });
+//   useEffect(() => {
+//     window.localStorage.setItem(contacts, JSON.stringify(state));
+//   }, [contacts, state]);
+//   return [state, setState];
+// };
 
 export default function App() {
-  const [contacts, setContacts] = useState([]);
+  const [contacts, setContacts] = useState(() => {
+    return (
+      JSON.parse(window.localStorage.getItem("contacts")) ?? defaultContacts
+    );
+  });
   const [filter, setFilter] = useState("");
+
+  useEffect(() => {
+    window.localStorage.setItem("contacts", JSON.stringify(contacts));
+  }, [contacts]);
 
   const addContact = ({ name, number }) => {
     if (
@@ -24,21 +42,20 @@ export default function App() {
       name,
       number,
     };
-    setContacts(({ contacts }) => [newContact, ...contacts]);
+    setContacts((contacts) => [newContact, ...contacts]);
   };
-
+  const changeFilter = (e) => {
+    setFilter(e.currentTarget.value);
+  };
   const checkContact = () => {
     return contacts.filter((contact) =>
       contact.name.toLowerCase().includes(filter.toLowerCase())
     );
   };
 
-  const changeFilter = (e) => {
-    setFilter(e.currentTarget.value);
-  };
   const removeContact = (contactId) => {
     setContacts((prevContacts) =>
-      prevContacts.contacts.filter((contact) => contact.id !== contactId)
+      prevContacts.filter((contact) => contact.id !== contactId)
     );
   };
 
@@ -57,6 +74,7 @@ export default function App() {
     </>
   );
 }
+
 // export default class App extends Component {
 //   state = {
 //     contacts: [
